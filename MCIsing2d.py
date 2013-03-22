@@ -18,7 +18,7 @@ def initialize(size):
     myarray[myarray>=0.5] = 1
     return myarray
 
-@profile
+#@profile
 def deltaU(s,i,j):
     """
     Compute delta U of flipping a given dipole at i,j
@@ -61,7 +61,7 @@ def shouldshow(iteration,size,showevery):
             showevery = size*size
         return divmod(iteration,showevery)[1] == 0
 
-@profile
+#@profile
 def simulate(size, T, showevery=None, graphics=True):
     """
     
@@ -72,6 +72,8 @@ def simulate(size, T, showevery=None, graphics=True):
     """
     # Some magic to set up plotting
     #pylab.ion() # You need this if running standalone
+    import time
+    start = time.time()
 
     if graphics:
         fig = pylab.figure()
@@ -100,6 +102,8 @@ def simulate(size, T, showevery=None, graphics=True):
             print "Showing iteration",trial
             colorsquare(s,fig)
     if graphics: colorsquare(s,fig)
+    stop = time.time()
+    print "That took",stop-start,"seconds, or",numtrials/(stop-start),"trials per second"
     
 if __name__ == '__main__':
     raw_input()  # you need this.
